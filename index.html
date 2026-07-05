@@ -79,7 +79,7 @@ const SPECIAL = [
     id:          'doj',
     name:        'DOJ',
     color:       'blue',
-    note:        'Ka\u017Cda osoba pracuj\u0105ca na departamencie ( po okazaniu odznaki ) posiada zni\u017Ck\u0119 na zestawy standard za 1$ raz na 3h. (Pamiętaj aby zapisać komu wydaliście zestaw i sprawdzić czy już mineło 3h)',
+    note:        'Ka\u017Cda osoba pracuj\u0105ca na departamencie ( po okazaniu odznaki ) posiada zni\u017Ck\u0119 na zestawy standard za 1$ raz na 3h. (Pami\u0119taj aby zapisa\u0107 komu wydali\u015Bcie zestaw i sprawdzi\u0107 czy ju\u017C min\u0119\u0142o 3h)',
     items: [
       { id: 'standard', name: 'Standard', emoji: '\uD83D\uDC6E' },
     ],
@@ -162,8 +162,7 @@ const SETTINGS = {
   .header{text-align:center;margin-bottom:1.25rem;position:relative}
   .theme-btn{position:absolute;right:0;top:0;background:var(--glass);border:1px solid var(--glass-b);border-radius:2rem;padding:6px 14px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;backdrop-filter:blur(10px);transition:all .2s}
   .theme-btn:hover{color:var(--accent);border-color:var(--accent)}
-  .logo-cool{font-family:'Pacifico',cursive;font-size:3rem;color:var(--pink);line-height:1;display:block;text-shadow:3px 3px 0 var(--brown),1px 1px 0 rgba(0,0,0,.3)}
-  .logo-beans{display:inline-block;background:var(--glass);border:1px solid var(--glass-b);backdrop-filter:blur(8px);border-radius:2rem;padding:3px 20px;font-size:.7rem;letter-spacing:.45em;text-transform:uppercase;color:var(--brown);font-weight:800;margin-top:3px}
+  .logo-img{height:110px;width:auto;object-fit:contain;display:block;margin:0 auto .3rem}
   .tagline{font-size:11px;color:var(--muted);letter-spacing:.08em;margin-top:.4rem}
   .sep{height:1px;background:linear-gradient(90deg,transparent,var(--pink),transparent);margin:1rem 0;opacity:.4}
   .sec-label{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;font-weight:800;padding-left:2px}
@@ -251,8 +250,7 @@ const SETTINGS = {
 
   <div class="header">
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F; Jasny</button>
-    <span class="logo-cool">Cool</span>
-    <span class="logo-beans">Beans</span>
+    <img src="CBlogo.png" alt="Cool Beans" class="logo-img">
     <div class="tagline">&#9749; kalkulator zam&#xF3;wie&#x144;</div>
   </div>
 
@@ -295,7 +293,7 @@ const SETTINGS = {
 </div>
 <footer>
 <center><span style="font-size: xx-small">By Narti 780889041259724831</span></center>
-</footer> 
+</footer>
 
 <script>
 /* ── State ── */
