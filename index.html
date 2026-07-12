@@ -116,6 +116,11 @@ const SETTINGS = {
   useDiscountWord:  false,
   discountWord:     'znizka',
 };
+
+// Funkcja formatująca liczby BEZ spacji
+function formatNumber(num) {
+    return num.toString();
+}
 </script>
 <style>
   :root {
@@ -406,11 +411,11 @@ function renderArea() {
     let priceLine = '';
     if (isPromo) {
       priceLine = '<span style="text-decoration:line-through;opacity:.5;font-size:14px;margin-right:6px">'
-        + sp.pricePerSet.toLocaleString('pl-PL') + SETTINGS.currency + '</span>'
-        + '<span class="sp-price-val">' + sp.promoPrice.toLocaleString('pl-PL') + SETTINGS.currency + '</span>'
+        + formatNumber(sp.pricePerSet) + SETTINGS.currency + '</span>'
+        + '<span class="sp-price-val">' + formatNumber(sp.promoPrice) + SETTINGS.currency + '</span>'
         + '<span class="sp-promo-badge">PROMO</span>';
     } else {
-      priceLine = '<span class="sp-price-val">' + unitPrice.toLocaleString('pl-PL') + SETTINGS.currency + '</span>'
+      priceLine = '<span class="sp-price-val">' + formatNumber(unitPrice) + SETTINGS.currency + '</span>'
         + (sp.promoQty > 0 ? '<span style="font-size:10px;color:var(--sc3);opacity:.6;margin-left:8px">promo od ' + sp.promoQty + 'x</span>' : '');
     }
 
@@ -427,7 +432,7 @@ function renderArea() {
       + '</div></div>'
       + '<div class="sp-price-box">'
       + '<div><div class="sp-price-label">Cena za zestaw</div>' + priceLine + '</div>'
-      + '<div style="text-align:right"><div class="sp-price-label">Razem</div><div class="sp-price-val">' + total.toLocaleString('pl-PL') + SETTINGS.currency + '</div></div>'
+      + '<div style="text-align:right"><div class="sp-price-label">Razem</div><div class="sp-price-val">' + formatNumber(total) + SETTINGS.currency + '</div></div>'
       + '</div></div>';
     return;
   }
@@ -440,8 +445,8 @@ function renderArea() {
       let priceHtml = unavail
         ? '<span style="font-style:italic;opacity:.5">niedost\u0119pne</span>'
         : disc
-          ? '<span class="price-orig">' + item.price.toLocaleString('pl-PL') + SETTINGS.currency + '</span><span class="price-disc">' + price.toLocaleString('pl-PL') + SETTINGS.currency + '</span>'
-          : price.toLocaleString('pl-PL') + SETTINGS.currency;
+          ? '<span class="price-orig">' + formatNumber(item.price) + SETTINGS.currency + '</span><span class="price-disc">' + formatNumber(price) + SETTINGS.currency + '</span>'
+          : formatNumber(price) + SETTINGS.currency;
       const cls = (unavail ? ' unavail' : '') + (qty[item.id] > 0 ? ' active' : '');
       return '<div class="item-card' + cls + '" id="card_' + item.id + '">'
         + '<div class="item-info"><div class="item-name"><span class="item-emoji">' + item.emoji + '</span>' + item.name + '</div>'
@@ -506,7 +511,7 @@ function buildStrings() {
 
   const hasItems = orderParts.length > 0 && total >= 0;
   const orderStr = orderParts.join(', ');
-  const priceStr = total.toLocaleString('pl-PL') + SETTINGS.currency;
+  const priceStr = formatNumber(total) + SETTINGS.currency;
   return { hasItems, orderStr, priceStr, total };
 }
 
@@ -515,7 +520,7 @@ function update() {
   const { hasItems, orderStr, priceStr, total } = buildStrings();
   document.getElementById('orderText').innerHTML = hasItems ? orderStr : '<span style="color:var(--muted);font-style:italic;font-size:12px;">Dodaj pozycje...</span>';
   document.getElementById('priceText').innerHTML = hasItems ? priceStr : '<span style="color:var(--muted);font-style:italic;font-size:12px;">0' + SETTINGS.currency + '</span>';
-  document.getElementById('totalVal').textContent = total.toLocaleString('pl-PL') + SETTINGS.currency;
+  document.getElementById('totalVal').textContent = formatNumber(total) + SETTINGS.currency;
   ['copyOrderBtn','copyPriceBtn','copyAllBtn'].forEach(id => { document.getElementById(id).disabled = !hasItems; });
 }
 
