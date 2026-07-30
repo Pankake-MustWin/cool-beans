@@ -40,14 +40,14 @@
    ============================================================ */
 
 const MENU = [
-  { id: 'standard',  name: 'Standard',   price: 800,  emoji: '\u2B50' },
-  { id: 'slodziak',  name: 'S\u0142odziak',   price: 1500, emoji: '\uD83C\uDF6C' },
-  { id: 'pracus',    name: 'Pracu\u015B',     price: 1300, emoji: '\uD83D\uDCBC' },
-  { id: 'gagatek',   name: 'Gagatek',    price: 1300, emoji: '\uD83D\uDE0E' },
-  { id: 'ciastko',   name: 'Ciastko',    price: 900,  emoji: '\uD83C\uDF6A' },
-  { id: 'koktajl',   name: 'Koktajl',    price: 900,  emoji: '\uD83E\uDD64' },
-  { id: 'tost',      name: 'Tost',       price: 450,  emoji: '\uD83C\uDF5E' },
-  { id: 'smoothie',  name: 'Smoothie',   price: 450,  emoji: '\uD83E\uDD64' },
+  { id: 'standard',  name: 'Standard',   price: 1500,  emoji: '\u2B50' },
+  /*{ id: 'slodziak',  name: 'S\u0142odziak',   price: 1500, emoji: '\uD83C\uDF6C' },*/
+  { id: 'pracus',    name: 'Pracu\u015B',     price: 2000, emoji: '\uD83D\uDCBC' },
+  { id: 'gagatek',   name: 'Gagatek',    price: 2000, emoji: '\uD83D\uDE0E' },
+  { id: 'ciastko',   name: 'Ciastko',    price: 1500,  emoji: '\uD83C\uDF6A' },
+  { id: 'koktajl',   name: 'Koktajl',    price: 1500,  emoji: '\uD83E\uDD64' },
+  { id: 'tost',      name: 'Tost',       price: 1000,  emoji: '\uD83C\uDF5E' },
+  { id: 'smoothie',  name: 'Smoothie',   price: 1000,  emoji: '\uD83E\uDD64' },
 ];
 
 const COMPANIES = [
@@ -116,11 +116,6 @@ const SETTINGS = {
   useDiscountWord:  false,
   discountWord:     'znizka',
 };
-
-// Funkcja formatująca liczby BEZ spacji
-function formatNumber(num) {
-    return num.toString();
-}
 </script>
 <style>
   :root {
@@ -256,7 +251,7 @@ function formatNumber(num) {
   <div class="header">
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F; Jasny</button>
     <img src="CBlogo.png" alt="Cool Beans" class="logo-img">
-    <div class="tagline">&#127850; kalkulator zam&#xF3;wie&#x144;</div>
+    <div class="tagline">&#9749; kalkulator zam&#xF3;wie&#x144;</div>
   </div>
 
   <div class="sep"></div>
@@ -266,7 +261,7 @@ function formatNumber(num) {
 
   <div class="sep"></div>
 
-  <div class="sec-label" id="menuLabel">&#127850; Menu</div>
+  <div class="sec-label" id="menuLabel">&#9749; Menu</div>
   <div id="menuArea"></div>
 
   <div class="sep"></div>
@@ -294,7 +289,7 @@ function formatNumber(num) {
   <button class="btn-all" id="copyAllBtn" onclick="copyAll()" disabled>Kopiuj wszystko razem</button>
   <button class="btn-reset" onclick="resetOrder()">Wyczy&#x15B;&#x107; zam&#xF3;wienie</button>
 
-  <div class="bean-deco">&#127850; &#127850; &#127850;</div>
+  <div class="bean-deco">&#9749; &#9749; &#9749;</div>
 </div>
 <footer>
 <center><span style="font-size: xx-small">By Narti 780889041259724831</span></center>
@@ -411,11 +406,11 @@ function renderArea() {
     let priceLine = '';
     if (isPromo) {
       priceLine = '<span style="text-decoration:line-through;opacity:.5;font-size:14px;margin-right:6px">'
-        + formatNumber(sp.pricePerSet) + SETTINGS.currency + '</span>'
-        + '<span class="sp-price-val">' + formatNumber(sp.promoPrice) + SETTINGS.currency + '</span>'
+        + sp.pricePerSet.toLocaleString('pl-PL') + SETTINGS.currency + '</span>'
+        + '<span class="sp-price-val">' + sp.promoPrice.toLocaleString('pl-PL') + SETTINGS.currency + '</span>'
         + '<span class="sp-promo-badge">PROMO</span>';
     } else {
-      priceLine = '<span class="sp-price-val">' + formatNumber(unitPrice) + SETTINGS.currency + '</span>'
+      priceLine = '<span class="sp-price-val">' + unitPrice.toLocaleString('pl-PL') + SETTINGS.currency + '</span>'
         + (sp.promoQty > 0 ? '<span style="font-size:10px;color:var(--sc3);opacity:.6;margin-left:8px">promo od ' + sp.promoQty + 'x</span>' : '');
     }
 
@@ -432,7 +427,7 @@ function renderArea() {
       + '</div></div>'
       + '<div class="sp-price-box">'
       + '<div><div class="sp-price-label">Cena za zestaw</div>' + priceLine + '</div>'
-      + '<div style="text-align:right"><div class="sp-price-label">Razem</div><div class="sp-price-val">' + formatNumber(total) + SETTINGS.currency + '</div></div>'
+      + '<div style="text-align:right"><div class="sp-price-label">Razem</div><div class="sp-price-val">' + total.toLocaleString('pl-PL') + SETTINGS.currency + '</div></div>'
       + '</div></div>';
     return;
   }
@@ -445,8 +440,8 @@ function renderArea() {
       let priceHtml = unavail
         ? '<span style="font-style:italic;opacity:.5">niedost\u0119pne</span>'
         : disc
-          ? '<span class="price-orig">' + formatNumber(item.price) + SETTINGS.currency + '</span><span class="price-disc">' + formatNumber(price) + SETTINGS.currency + '</span>'
-          : formatNumber(price) + SETTINGS.currency;
+          ? '<span class="price-orig">' + item.price.toLocaleString('pl-PL') + SETTINGS.currency + '</span><span class="price-disc">' + price.toLocaleString('pl-PL') + SETTINGS.currency + '</span>'
+          : price.toLocaleString('pl-PL') + SETTINGS.currency;
       const cls = (unavail ? ' unavail' : '') + (qty[item.id] > 0 ? ' active' : '');
       return '<div class="item-card' + cls + '" id="card_' + item.id + '">'
         + '<div class="item-info"><div class="item-name"><span class="item-emoji">' + item.emoji + '</span>' + item.name + '</div>'
@@ -511,7 +506,7 @@ function buildStrings() {
 
   const hasItems = orderParts.length > 0 && total >= 0;
   const orderStr = orderParts.join(', ');
-  const priceStr = formatNumber(total) + SETTINGS.currency;
+  const priceStr = total.toLocaleString('pl-PL') + SETTINGS.currency;
   return { hasItems, orderStr, priceStr, total };
 }
 
@@ -520,7 +515,7 @@ function update() {
   const { hasItems, orderStr, priceStr, total } = buildStrings();
   document.getElementById('orderText').innerHTML = hasItems ? orderStr : '<span style="color:var(--muted);font-style:italic;font-size:12px;">Dodaj pozycje...</span>';
   document.getElementById('priceText').innerHTML = hasItems ? priceStr : '<span style="color:var(--muted);font-style:italic;font-size:12px;">0' + SETTINGS.currency + '</span>';
-  document.getElementById('totalVal').textContent = formatNumber(total) + SETTINGS.currency;
+  document.getElementById('totalVal').textContent = total.toLocaleString('pl-PL') + SETTINGS.currency;
   ['copyOrderBtn','copyPriceBtn','copyAllBtn'].forEach(id => { document.getElementById(id).disabled = !hasItems; });
 }
 
