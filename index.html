@@ -520,15 +520,16 @@ function buildStrings() {
 
   const hasItems = orderParts.length > 0 && total >= 0;
   const orderStr = orderParts.join(', ');
-  const priceStr = total.toLocaleString('pl-PL') + SETTINGS.currency;
-  return { hasItems, orderStr, priceStr, total };
+  const priceStr = total + SETTINGS.currency;
+  const priceDisplay = total.toLocaleString('pl-PL') + SETTINGS.currency;
+  return { hasItems, orderStr, priceStr, priceDisplay, total };
 }
 
 /* ── Update UI ── */
 function update() {
-  const { hasItems, orderStr, priceStr, total } = buildStrings();
+  const { hasItems, orderStr, priceStr, priceDisplay, total } = buildStrings();
   document.getElementById('orderText').innerHTML = hasItems ? orderStr : '<span style="color:var(--muted);font-style:italic;font-size:12px;">Dodaj pozycje...</span>';
-  document.getElementById('priceText').innerHTML = hasItems ? priceStr : '<span style="color:var(--muted);font-style:italic;font-size:12px;">0' + SETTINGS.currency + '</span>';
+  document.getElementById('priceText').innerHTML = hasItems ? priceDisplay : '<span style="color:var(--muted);font-style:italic;font-size:12px;">0' + SETTINGS.currency + '</span>';
   document.getElementById('totalVal').textContent = total.toLocaleString('pl-PL') + SETTINGS.currency;
   ['copyOrderBtn','copyPriceBtn','copyAllBtn'].forEach(id => { document.getElementById(id).disabled = !hasItems; });
 }
